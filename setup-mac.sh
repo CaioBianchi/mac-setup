@@ -316,7 +316,7 @@ step_zsh_bootstrap() {
   log "Ensuring ~/.zshrc sources ~/.config/zsh/bootstrap.zsh..."
   local zshrc="${HOME}/.zshrc"
   append_if_missing '# --- bootstrap ---' "${zshrc}"
-  append_if_missing '[[ -f "$HOME/.config/zsh/bootstrap.zsh" ]] && source "$HOME/.config/zsh/bootstrap.zsh"' "${zshrc}"
+  append_if_missing "[[ -f '$HOME/.config/zsh/bootstrap.zsh' ]] && source '$HOME/.config/zsh/bootstrap.zsh'" "${zshrc}"
 }
 
 step_terminal_profile() {
