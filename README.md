@@ -23,8 +23,8 @@ The script is fully step-toggleable and safe to re-run.
 ## Quick Start
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-cd YOUR_REPO
+git clone https://github.com/CaioBianchi/mac-setup.git
+cd mac-setup
 chmod +x setup-mac.sh
 ./setup-mac.sh
 ```
