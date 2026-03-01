@@ -1,0 +1,27 @@
+name: lint
+
+on:
+  pull_request:
+  push:
+    branches: ["main"]
+
+jobs:
+  shellcheck:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install linters
+        run: |
+          brew update
+          brew install shellcheck shfmt
+
+      - name: ShellCheck
+        run: shellcheck setup-mac.sh
+
+      - name: shfmt (diff)
+        run: shfmt -d -i 2 -ci setup-mac.sh
+
+      - name: Brewfile parses
+        run: |
+          brew bundle --file ./Brewfile --no-upgrade --cleanup --dry-run || true
