@@ -1,6 +1,6 @@
 # macOS Bootstrap
 
-[![CI](https://github.com/YOUR_USERNAME/YOUR_REPO/actions/workflows/lint.yml/badge.svg)](https://github.com/YOUR_USERNAME/YOUR_REPO/actions)
+[![CI](https://github.com/CaioBianchi/mac-setup/actions/workflows/lint.yml/badge.svg)](https://github.com/CaioBianchi/mac-setup/actions)
 ![ShellCheck](https://img.shields.io/badge/linted-shellcheck-brightgreen)
 ![Platform](https://img.shields.io/badge/platform-macOS-black)
 ![License](https://img.shields.io/badge/license-O'Sassy-purple)
