@@ -11,7 +11,6 @@ This repository provides a deterministic setup for a development workstation usi
 
 - Homebrew (via `Brewfile`)
 - LazyVim
-- Starship (Catppuccin preset)
 - Personal dotfiles (`rcm`)
 - Safari extension (uBlock Origin Lite via `mas`)
 - Custom Terminal profile
@@ -73,8 +72,6 @@ The bootstrap process is modular.
 | `mas_ublock`       | Install uBlock Origin Lite via App Store |
 | `lazyvim`          | Clone LazyVim starter                    |
 | `nvim_sync`        | Headless Neovim plugin sync              |
-| `starship`         | Generate Starship Catppuccin preset      |
-| `zsh_bootstrap`    | Install and source zsh bootstrap config  |
 | `terminal_profile` | Import and set Terminal profile          |
 
 ---
