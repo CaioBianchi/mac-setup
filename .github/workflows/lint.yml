@@ -23,5 +23,4 @@ jobs:
         run: shfmt -d -i 2 -ci setup-mac.sh
 
       - name: Brewfile parses
-        run: |
-          brew bundle --file ./Brewfile --no-upgrade --cleanup --dry-run || true
+        run: brew bundle list --file ./Brewfile --all >/dev/null

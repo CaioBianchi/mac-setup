@@ -62,15 +62,15 @@ contains() {
 # Steps
 # =========================
 STEPS=(
-preflight
-xcode
-homebrew
-brew_bundle
-dotfiles
-mas_ublock
-lazyvim
-nvim_sync
-terminal_profile
+  preflight
+  xcode
+  homebrew
+  brew_bundle
+  dotfiles
+  mas_ublock
+  lazyvim
+  nvim_sync
+  terminal_profile
 )
 
 list_steps() {
@@ -79,24 +79,24 @@ list_steps() {
 
 usage() {
   cat <<'EOF'
-  Usage:
-  ./setup-mac.sh [options]
+Usage:
+./setup-mac.sh [options]
 
-  Options:
-  --all                     Run all steps (default).
-  --list                    List available steps.
-  --only step1,step2        Run only these steps (comma-separated).
-  --skip step1,step2        Skip these steps (comma-separated).
-  --no-brew-update          Do not run 'brew update' in the homebrew step.
-  -h, --help                Show this help.
+Options:
+--all                     Run all steps (default).
+--list                    List available steps.
+--only step1,step2        Run only these steps (comma-separated).
+--skip step1,step2        Skip these steps (comma-separated).
+--no-brew-update          Do not run 'brew update' in the homebrew step.
+-h, --help                Show this help.
 
-  Examples:
-  ./setup-mac.sh
-  ./setup-mac.sh --list
-  ./setup-mac.sh --only homebrew,brew_bundle
-  ./setup-mac.sh --skip mas_ublock,terminal_profile
-  ./setup-mac.sh --only dotfiles
-  EOF
+Examples:
+./setup-mac.sh
+./setup-mac.sh --list
+./setup-mac.sh --only homebrew,brew_bundle
+./setup-mac.sh --skip mas_ublock,terminal_profile
+./setup-mac.sh --only dotfiles
+EOF
 }
 
 # Execution filters
