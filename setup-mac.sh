@@ -8,9 +8,6 @@ set -euo pipefail
 : "${TERMINAL_PROFILE_NAME:=Catppuccin Mocha}"
 
 : "${BREWFILE_PATH:=./Brewfile}"
-: "${ZSH_BOOTSTRAP_SRC:=./zsh/bootstrap.zsh}"
-: "${ZSH_BOOTSTRAP_DST:=${HOME}/.config/zsh/bootstrap.zsh}"
-
 : "${MAS_UBLOCK_ORIGIN_LITE_ID:=6745342698}"
 
 : "${DOTFILES_REPO:=git://github.com/CaioBianchi/dotfiles.git}"
@@ -73,8 +70,6 @@ STEPS=(
   mas_ublock
   lazyvim
   nvim_sync
-  starship
-  zsh_bootstrap
   terminal_profile
 )
 
@@ -115,38 +110,38 @@ NO_BREW_UPDATE="0"
 # =========================
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --list)
-      list_steps
-      exit 0
-      ;;
-    --all)
-      RUN_MODE="all"
-      shift
-      ;;
-    --only)
-      RUN_MODE="only"
-      shift
-      [[ $# -gt 0 ]] || die "--only requires a comma-separated list"
-      mapfile -t ONLY_STEPS < <(split_csv "$1")
-      shift
-      ;;
-    --skip)
-      shift
-      [[ $# -gt 0 ]] || die "--skip requires a comma-separated list"
-      mapfile -t SKIP_STEPS < <(split_csv "$1")
-      shift
-      ;;
-    --no-brew-update)
-      NO_BREW_UPDATE="1"
-      shift
-      ;;
-    -h | --help)
-      usage
-      exit 0
-      ;;
-    *)
-      die "Unknown option: $1 (use --help)"
-      ;;
+  --list)
+    list_steps
+    exit 0
+    ;;
+  --all)
+    RUN_MODE="all"
+    shift
+    ;;
+  --only)
+    RUN_MODE="only"
+    shift
+    [[ $# -gt 0 ]] || die "--only requires a comma-separated list"
+    mapfile -t ONLY_STEPS < <(split_csv "$1")
+    shift
+    ;;
+  --skip)
+    shift
+    [[ $# -gt 0 ]] || die "--skip requires a comma-separated list"
+    mapfile -t SKIP_STEPS < <(split_csv "$1")
+    shift
+    ;;
+  --no-brew-update)
+    NO_BREW_UPDATE="1"
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    die "Unknown option: $1 (use --help)"
+    ;;
   esac
 done
 
@@ -293,32 +288,6 @@ step_nvim_sync() {
   fi
 }
 
-step_starship() {
-  log "Configuring starship with catppuccin-powerline preset..."
-  mkdir -p "${HOME}/.config"
-  if have starship; then
-    starship preset catppuccin-powerline -o "${HOME}/.config/starship.toml"
-  else
-    warn "starship not found. Ensure it's in Brewfile and run brew steps."
-  fi
-}
-
-step_zsh_bootstrap() {
-  log "Installing zsh bootstrap file..."
-  mkdir -p "$(dirname "${ZSH_BOOTSTRAP_DST}")"
-
-  if [[ -f "${ZSH_BOOTSTRAP_SRC}" ]]; then
-    cp -f "${ZSH_BOOTSTRAP_SRC}" "${ZSH_BOOTSTRAP_DST}"
-  else
-    warn "Missing '${ZSH_BOOTSTRAP_SRC}'. Skipping bootstrap.zsh install."
-  fi
-
-  log "Ensuring ~/.zshrc sources ~/.config/zsh/bootstrap.zsh..."
-  local zshrc="${HOME}/.zshrc"
-  append_if_missing '# --- bootstrap ---' "${zshrc}"
-  append_if_missing "[[ -f '$HOME/.config/zsh/bootstrap.zsh' ]] && source '$HOME/.config/zsh/bootstrap.zsh'" "${zshrc}"
-}
-
 step_terminal_profile() {
   log "Importing Terminal.app profile from: ${TERMINAL_PROFILE_FILE}"
   if [[ -f "${TERMINAL_PROFILE_FILE}" ]]; then
@@ -335,18 +304,16 @@ step_terminal_profile() {
 run_step() {
   local step="$1"
   case "$step" in
-    preflight) step_preflight ;;
-    xcode) step_xcode ;;
-    homebrew) step_homebrew ;;
-    brew_bundle) step_brew_bundle ;;
-    dotfiles) step_dotfiles ;;
-    mas_ublock) step_mas_ublock ;;
-    lazyvim) step_lazyvim ;;
-    nvim_sync) step_nvim_sync ;;
-    starship) step_starship ;;
-    zsh_bootstrap) step_zsh_bootstrap ;;
-    terminal_profile) step_terminal_profile ;;
-    *) die "No implementation for step: $step" ;;
+  preflight) step_preflight ;;
+  xcode) step_xcode ;;
+  homebrew) step_homebrew ;;
+  brew_bundle) step_brew_bundle ;;
+  dotfiles) step_dotfiles ;;
+  mas_ublock) step_mas_ublock ;;
+  lazyvim) step_lazyvim ;;
+  nvim_sync) step_nvim_sync ;;
+  terminal_profile) step_terminal_profile ;;
+  *) die "No implementation for step: $step" ;;
   esac
 }
 

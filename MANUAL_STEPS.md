@@ -96,5 +96,4 @@ You’re done when:
 - `brew doctor` reports no critical issues
 - `gh auth status` shows authenticated
 - `nvim` launches with LazyVim working
-- Starship prompt loads correctly
 - Safari has uBlock Origin Lite enabled
