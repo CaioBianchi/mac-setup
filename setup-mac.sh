@@ -110,38 +110,38 @@ NO_BREW_UPDATE="0"
 # =========================
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --list)
-      list_steps
-      exit 0
-      ;;
-    --all)
-      RUN_MODE="all"
-      shift
-      ;;
-    --only)
-      RUN_MODE="only"
-      shift
-      [[ $# -gt 0 ]] || die "--only requires a comma-separated list"
-      mapfile -t ONLY_STEPS < <(split_csv "$1")
-      shift
-      ;;
-    --skip)
-      shift
-      [[ $# -gt 0 ]] || die "--skip requires a comma-separated list"
-      mapfile -t SKIP_STEPS < <(split_csv "$1")
-      shift
-      ;;
-    --no-brew-update)
-      NO_BREW_UPDATE="1"
-      shift
-      ;;
-    -h | --help)
-      usage
-      exit 0
-      ;;
-    *)
-      die "Unknown option: $1 (use --help)"
-      ;;
+  --list)
+    list_steps
+    exit 0
+    ;;
+  --all)
+    RUN_MODE="all"
+    shift
+    ;;
+  --only)
+    RUN_MODE="only"
+    shift
+    [[ $# -gt 0 ]] || die "--only requires a comma-separated list"
+    mapfile -t ONLY_STEPS < <(split_csv "$1")
+    shift
+    ;;
+  --skip)
+    shift
+    [[ $# -gt 0 ]] || die "--skip requires a comma-separated list"
+    mapfile -t SKIP_STEPS < <(split_csv "$1")
+    shift
+    ;;
+  --no-brew-update)
+    NO_BREW_UPDATE="1"
+    shift
+    ;;
+  -h | --help)
+    usage
+    exit 0
+    ;;
+  *)
+    die "Unknown option: $1 (use --help)"
+    ;;
   esac
 done
 
@@ -304,16 +304,16 @@ step_terminal_profile() {
 run_step() {
   local step="$1"
   case "$step" in
-    preflight) step_preflight ;;
-    xcode) step_xcode ;;
-    homebrew) step_homebrew ;;
-    brew_bundle) step_brew_bundle ;;
-    dotfiles) step_dotfiles ;;
-    mas_ublock) step_mas_ublock ;;
-    lazyvim) step_lazyvim ;;
-    nvim_sync) step_nvim_sync ;;
-    terminal_profile) step_terminal_profile ;;
-    *) die "No implementation for step: $step" ;;
+  preflight) step_preflight ;;
+  xcode) step_xcode ;;
+  homebrew) step_homebrew ;;
+  brew_bundle) step_brew_bundle ;;
+  dotfiles) step_dotfiles ;;
+  mas_ublock) step_mas_ublock ;;
+  lazyvim) step_lazyvim ;;
+  nvim_sync) step_nvim_sync ;;
+  terminal_profile) step_terminal_profile ;;
+  *) die "No implementation for step: $step" ;;
   esac
 }
 
